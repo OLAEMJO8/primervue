@@ -1,58 +1,53 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-import CicloComponente from "./views/CicloComponente.vue";
-import Methods from "./views/methods.vue";
-</script>
-
 <template>
-  <header>
-    <div>
-      <nav>
-        <RouterLink to="/">Ciclo</RouterLink>
-        <RouterLink to="/about">Methods</RouterLink>
-      </nav>
+  <div>
+    <header>
+      <div>
+        <nav>
+          <RouterLink to="/" class="nav-link">Ciclo</RouterLink>
+          <RouterLink to="/about" class="nav-link">Methods</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      <RouterView />
     </div>
-  </header>
-  <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+
 
 nav {
-  width: 100%;
-  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
   text-align: center;
+  padding: 10px 20px;
+  background-color: #9d8cb1;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #45236b;
+font-size: 12px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.content {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  display: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 2rem;
-}
+  color: #000;
+  
 
-nav a {
-  /* display: inline-block; */
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: contents;
-    place-items: center;
-    /* padding-right: calc(var(--section-gap) / 2); */
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>

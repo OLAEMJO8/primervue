@@ -4,7 +4,7 @@
  
 <template>
   <div class="contador-container" >
-    <p  class="contador">Contador: {{ contador }}</p>
+    <p  class="contador">{{ contador }}</p>
     <button @click="incrementarContador">Incrementar</button>
     <button @click="reiniciarContador">Reiniciar</button>
   </div>
@@ -43,10 +43,11 @@ export default {
 
 .contador {
   text-align: center;
-  border: 1px solid #ccc; 
+
   padding: 10px; 
-  display: inline-block; 
-  
+
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 50px;
 }
 
 
@@ -58,5 +59,7 @@ color: white;
 border: none;
 border-radius: 5px;
 cursor: pointer;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
 }
 </style>

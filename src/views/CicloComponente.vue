@@ -12,7 +12,7 @@
 
 <template>
   <div class="contador-container">
-    <p v-if="mostrarContador" class="contador">Contador: {{ contador }}</p>
+    <p v-if="mostrarContador" class="contador">{{ contador }}</p>
     <button @click="montarContador" v-if="!mostrarContador">
       Montar Contador
     </button>
@@ -71,14 +71,19 @@ export default {
 .contador-container {
   padding: 20px;
   text-align: center;
-  border: 2px solid #ffffff;
+
 }
 
 .contador {
   text-align: center;
-  border: 1px solid #ccc;
+
   padding: 10px;
-  display: inline-block;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .contador-container button {
@@ -88,5 +93,7 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
 }
 </style>
