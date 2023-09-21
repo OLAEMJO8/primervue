@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-
-
+import CicloComponente from "./views/CicloComponente.vue";
+import Methods from "./views/methods.vue";
 </script>
 
 <template>
@@ -13,9 +13,7 @@ import { RouterLink, RouterView } from "vue-router";
       </nav>
     </div>
   </header>
-
-    <RouterView />
-
+  <RouterView />
 </template>
 
 <style scoped>
