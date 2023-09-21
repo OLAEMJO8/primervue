@@ -1,22 +1,13 @@
-<!-- El ciclo de vida de un componente se refiere a las diferentes etapas por las que pasa un componente 
-  Vue desde su creación hasta su destrucción. 
-  Estas etapas incluyen la creación, montaje, actualización y destrucción del componente 
-  El ciclo de vida te permite realizar acciones específicas en cada etapa,
- como configurar datos, realizar llamadas a API, 
-  suscribirte a eventos y limpiar recursos cuando un componente se destruye.
--->
-<!-- Los estados en Vue se refieren a las variables de datos que un componente 
-  utiliza para mantener su estado interno. 
-  Los estados son propiedades que pueden ser reactivas, lo que significa que cuando cambian, 
-  Vue automáticamente actualiza la vista para reflejar esos cambios. -->
-
 <template>
   <div class="contador-container">
+    <!-- Mostrar el contador si la variable mostrarContador es verdadera -->
     <p v-if="mostrarContador" class="contador">{{ contador }}</p>
+    <!-- Botón para montar el contador si mostrarContador es falso -->
     <button @click="montarContador" v-if="!mostrarContador">
       Montar Contador
     </button>
 
+    <!-- Botones para acciones cuando mostrarContador es verdadera -->
     <div v-if="mostrarContador">
       <br />
       <button @click="desmontarContador">Desmontar Contador</button>
@@ -27,42 +18,61 @@
 </template>
 
 <script>
+import { ref, watchEffect, onBeforeUnmount } from 'vue';
+
 export default {
-  data() {
-    return {
-      contador: 0,
-      mostrarContador: false,
-      intervalo: null,
-    };
-  },
-  created() {
+  setup() {
+    // Utilizar ref para declarar variables reactivas
+    const contador = ref(0);
+    const mostrarContador = ref(false);
+    let intervalo;
+
+    // Ciclo de vida: created
     console.log("El componente se ha creado.");
-  },
-  mounted() {
-    console.log("El componente se ha montado en el DOM.");
-  },
-  beforeUnmount() {
-    console.log("El componente se va a desmontar.");
-    clearInterval(this.intervalo);
-  },
-  methods: {
-    montarContador() {
+
+    // Utilizar watchEffect para el ciclo de vida: mounted
+    watchEffect(() => {
+      if (mostrarContador.value) {
+        console.log("El componente se ha montado en el DOM.");
+      }
+    });
+
+    // Utilizar onBeforeUnmount para el ciclo de vida: beforeUnmount
+    onBeforeUnmount(() => {
+      console.log("El componente se va a desmontar.");
+      clearInterval(intervalo);
+    });
+
+    // Métodos para interactuar con el estado
+    const montarContador = () => {
       console.log("Montando el contador...");
-      this.mostrarContador = true;
-    },
-    desmontarContador() {
+      mostrarContador.value = true;
+    };
+
+    const desmontarContador = () => {
       console.log("Desmontando el contador...");
-      this.mostrarContador = false;
-      clearInterval(this.intervalo);
-    },
-    incrementarContador() {
+      mostrarContador.value = false;
+      clearInterval(intervalo);
+    };
+
+    const incrementarContador = () => {
       console.log("Incrementando el contador manualmente...");
-      this.contador++;
-    },
-    actualizarContador() {
+      contador.value++;
+    };
+
+    const actualizarContador = () => {
       console.log("Actualizando el contador a cero...");
-      this.contador = 0;
-    },
+      contador.value = 0;
+    };
+
+    return {
+      contador,
+      mostrarContador,
+      montarContador,
+      desmontarContador,
+      incrementarContador,
+      actualizarContador,
+    };
   },
 };
 </script>
@@ -71,14 +81,12 @@ export default {
 .contador-container {
   padding: 20px;
   text-align: center;
-
 }
 
 .contador {
   text-align: center;
-
   padding: 10px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 50px;
   display: flex;
   flex-direction: column;
@@ -93,7 +101,7 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
 }
 </style>
